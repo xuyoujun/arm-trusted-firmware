@@ -15,10 +15,9 @@
 #include <lib/mmio.h>
 #include <lib/utils.h>
 #include <lib/xlat_tables/xlat_tables_compat.h>
+#include <plat/arm/common/plat_arm.h>
 #include <plat/common/platform.h>
-
-#include <arm_def.h>
-#include <plat_arm.h>
+#include <platform_def.h>
 
 /*
  * Placeholder variables for copying the arguments that have been passed to
@@ -241,11 +240,7 @@ void arm_bl31_platform_setup(void)
  ******************************************************************************/
 void arm_bl31_plat_runtime_setup(void)
 {
-#if MULTI_CONSOLE_API
 	console_switch_state(CONSOLE_FLAG_RUNTIME);
-#else
-	console_uninit();
-#endif
 
 	/* Initialize the runtime console */
 	arm_console_runtime_init();

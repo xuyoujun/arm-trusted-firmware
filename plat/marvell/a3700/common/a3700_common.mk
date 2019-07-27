@@ -13,6 +13,7 @@ PLAT_INCLUDE_BASE		:= $(MARVELL_PLAT_INCLUDE_BASE)/$(PLAT_FAMILY)
 PLAT_COMMON_BASE		:= $(PLAT_FAMILY_BASE)/common
 MARVELL_DRV_BASE		:= drivers/marvell
 MARVELL_COMMON_BASE		:= $(MARVELL_PLAT_BASE)/common
+HANDLE_EA_EL3_FIRST		:= 1
 
 include $(MARVELL_PLAT_BASE)/marvell.mk
 
@@ -84,14 +85,11 @@ MARVELL_GIC_SOURCES	:=	drivers/arm/gic/common/gic_common.c	\
 				plat/common/plat_gicv3.c		\
 				drivers/arm/gic/v3/gic500.c
 
-ATF_INCLUDES		:=	-Iinclude/common/tbbr
-
 PLAT_INCLUDES		:=	-I$(PLAT_FAMILY_BASE)/$(PLAT)		\
 				-I$(PLAT_COMMON_BASE)/include		\
 				-I$(PLAT_INCLUDE_BASE)/common		\
 				-I$(MARVELL_DRV_BASE)			\
-				-I$/drivers/arm/gic/common/		\
-				$(ATF_INCLUDES)
+				-I$/drivers/arm/gic/common/
 
 PLAT_BL_COMMON_SOURCES	:=	$(PLAT_COMMON_BASE)/aarch64/a3700_common.c \
 				$(MARVELL_COMMON_BASE)/marvell_cci.c	   \
@@ -110,6 +108,7 @@ BL31_SOURCES		+=	lib/cpus/aarch64/cortex_a53.S		\
 				$(PLAT_COMMON_BASE)/dram_win.c		\
 				$(PLAT_COMMON_BASE)/io_addr_dec.c	\
 				$(PLAT_COMMON_BASE)/marvell_plat_config.c     \
+				$(PLAT_COMMON_BASE)/a3700_ea.c		\
 				$(PLAT_FAMILY_BASE)/$(PLAT)/plat_bl31_setup.c \
 				$(MARVELL_COMMON_BASE)/marvell_ddr_info.c	\
 				$(MARVELL_COMMON_BASE)/marvell_gicv3.c	\

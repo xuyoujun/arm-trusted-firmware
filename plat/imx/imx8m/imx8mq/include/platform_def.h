@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, ARM Limited and Contributors. All rights reserved.
+ * Copyright (c) 2018-2019, ARM Limited and Contributors. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -26,6 +26,7 @@
 #define PLAT_MAX_OFF_STATE		U(4)
 #define PLAT_MAX_RET_STATE		U(1)
 
+#define PLAT_WAIT_RET_STATE		PLAT_MAX_RET_STATE
 #define PLAT_WAIT_OFF_STATE		U(2)
 #define PLAT_STOP_OFF_STATE		U(3)
 
@@ -58,6 +59,7 @@
 #define IMX_AIPS_SIZE			U(0xC00000)
 #define IMX_AIPS1_BASE			U(0x30200000)
 #define IMX_AIPS3_ARB_BASE		U(0x30800000)
+#define IMX_OCOTP_BASE			U(0x30350000)
 #define IMX_ANAMIX_BASE			U(0x30360000)
 #define IMX_CCM_BASE			U(0x30380000)
 #define IMX_SRC_BASE			U(0x30390000)
@@ -68,11 +70,14 @@
 #define IMX_SNVS_BASE			U(0x30370000)
 #define IMX_NOC_BASE			U(0x32700000)
 #define IMX_TZASC_BASE			U(0x32F80000)
+#define IMX_CAAM_BASE			U(0x30900000)
 #define IMX_IOMUX_GPR_BASE		U(0x30340000)
 #define IMX_DDRC_BASE			U(0x3d400000)
 #define IMX_DDRPHY_BASE			U(0x3c000000)
 #define IMX_DDR_IPS_BASE		U(0x3d000000)
+
 #define IMX_ROM_BASE			U(0x00000000)
+#define IMX_ROM_SIZE			U(0x20000)
 
 #define AIPSTZ1_BASE			U(0x301f0000)
 #define AIPSTZ2_BASE			U(0x305f0000)
@@ -118,4 +123,3 @@
 
 #define DEBUG_CONSOLE			0
 #define IMX_WDOG_B_RESET
-#define PLAT_IMX8M			1

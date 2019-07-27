@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2015-2018, ARM Limited and Contributors. All rights reserved.
+# Copyright (c) 2015-2019, ARM Limited and Contributors. All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
 #
@@ -125,9 +125,6 @@ ENABLE_PMF			:=	1
 # mapping the former as executable and the latter as execute-never.
 SEPARATE_CODE_AND_RODATA	:=	1
 
-# Use the multi console API, which is only available for AArch64 for now
-MULTI_CONSOLE_API		:=	1
-
 # Disable ARM Cryptocell by default
 ARM_CRYPTOCELL_INTEG		:=	0
 $(eval $(call assert_boolean,ARM_CRYPTOCELL_INTEG))
@@ -140,9 +137,6 @@ ifeq (${ARM_CRYPTOCELL_INTEG},1)
         $(error "ARM_CRYPTOCELL_INTEG needs USE_COHERENT_MEM to be set.")
     endif
 endif
-
-PLAT_INCLUDES		+=	-Iinclude/common/tbbr				\
-				-Iinclude/plat/arm/common
 
 ifeq (${ARCH}, aarch64)
 PLAT_INCLUDES		+=	-Iinclude/plat/arm/common/aarch64
@@ -161,8 +155,7 @@ include lib/xlat_tables_v2/xlat_tables.mk
 PLAT_BL_COMMON_SOURCES	+=	${XLAT_TABLES_LIB_SRCS}
 endif
 
-BL1_SOURCES		+=	drivers/arm/sp805/sp805.c			\
-				drivers/io/io_fip.c				\
+BL1_SOURCES		+=	drivers/io/io_fip.c				\
 				drivers/io/io_memmap.c				\
 				drivers/io/io_storage.c				\
 				plat/arm/common/arm_bl1_setup.c			\
@@ -239,8 +232,13 @@ BL31_SOURCES		+=	lib/extensions/ras/std_err_record.c		\
 				lib/extensions/ras/ras_common.c
 endif
 
+# Pointer Authentication sources
+ifeq (${ENABLE_PAUTH}, 1)
+PLAT_BL_COMMON_SOURCES	+=	plat/arm/common/aarch64/arm_pauth.c
+endif
+
 # SPM uses libfdt in Arm platforms
-ifeq (${SPM_DEPRECATED},0)
+ifeq (${SPM_MM},0)
 ifeq (${ENABLE_SPM},1)
 BL31_SOURCES		+=	common/fdt_wrappers.c			\
 				plat/common/plat_spm_rd.c		\
@@ -256,8 +254,6 @@ ifneq (${TRUSTED_BOARD_BOOT},0)
 				drivers/auth/crypto_mod.c			\
 				drivers/auth/img_parser_mod.c			\
 				drivers/auth/tbbr/tbbr_cot.c			\
-
-    PLAT_INCLUDES	+=	-Iinclude/bl1/tbbr
 
     BL1_SOURCES		+=	${AUTH_SOURCES}					\
 				bl1/tbbr/tbbr_img_desc.c			\

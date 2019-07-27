@@ -71,12 +71,20 @@
 /* Data Cache set/way op type defines */
 #define DC_OP_ISW			U(0x0)
 #define DC_OP_CISW			U(0x1)
+#if ERRATA_A53_827319
+#define DC_OP_CSW			DC_OP_CISW
+#else
 #define DC_OP_CSW			U(0x2)
+#endif
 
 /*******************************************************************************
  * Generic timer memory mapped registers & offsets
  ******************************************************************************/
 #define CNTCR_OFF			U(0x000)
+/* Counter Count Value Lower register */
+#define CNTCVL_OFF			U(0x008)
+/* Counter Count Value Upper register */
+#define CNTCVU_OFF			U(0x00C)
 #define CNTFID_OFF			U(0x020)
 
 #define CNTCR_EN			(U(1) << 0)
@@ -114,6 +122,8 @@
 #define ID_PFR1_VIRTEXT_MASK	U(0xf)
 #define GET_VIRT_EXT(id)	(((id) >> ID_PFR1_VIRTEXT_SHIFT) \
 				 & ID_PFR1_VIRTEXT_MASK)
+#define ID_PFR1_GENTIMER_SHIFT	U(16)
+#define ID_PFR1_GENTIMER_MASK	U(0xf)
 #define ID_PFR1_GIC_SHIFT	U(28)
 #define ID_PFR1_GIC_MASK	U(0xf)
 
@@ -151,6 +161,7 @@
 #define SDCR_SPD_LEGACY		U(0x0)
 #define SDCR_SPD_DISABLE	U(0x2)
 #define SDCR_SPD_ENABLE		U(0x3)
+#define SDCR_SCCD_BIT		(U(1) << 23)
 #define SDCR_RESET_VAL		U(0x0)
 
 /* HSCTLR definitions */
@@ -283,6 +294,8 @@
 #define SPSR_MODE_SHIFT		U(0)
 #define SPSR_MODE_MASK		U(0x7)
 
+#define SPSR_SSBS_BIT		BIT_32(23)
+
 #define DISABLE_ALL_EXCEPTIONS \
 		(SPSR_FIQ_BIT | SPSR_IRQ_BIT | SPSR_ABT_BIT)
 
@@ -373,11 +386,12 @@
 #define GET_M32(mode)		(((mode) >> MODE32_SHIFT) & MODE32_MASK)
 
 #define SPSR_MODE32(mode, isa, endian, aif)		\
-	(MODE_RW_32 << MODE_RW_SHIFT |			\
+	((MODE_RW_32 << MODE_RW_SHIFT |			\
 	((mode) & MODE32_MASK) << MODE32_SHIFT |	\
 	((isa) & SPSR_T_MASK) << SPSR_T_SHIFT |		\
 	((endian) & SPSR_E_MASK) << SPSR_E_SHIFT |	\
-	((aif) & SPSR_AIF_MASK) << SPSR_AIF_SHIFT)
+	((aif) & SPSR_AIF_MASK) << SPSR_AIF_SHIFT) &	\
+	(~(SPSR_SSBS_BIT)))
 
 /*
  * TTBR definitions

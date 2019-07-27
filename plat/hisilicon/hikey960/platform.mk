@@ -17,7 +17,6 @@ else
   $(error "Currently unsupported HIKEY960_TSP_RAM_LOCATION value")
 endif
 
-MULTI_CONSOLE_API		:=	1
 CRASH_CONSOLE_BASE		:=	PL011_UART6_BASE
 COLD_BOOT_SINGLE_CPU		:=	1
 PLAT_PL061_MAX_GPIOS		:=	176
@@ -40,8 +39,7 @@ endif
 
 USE_COHERENT_MEM	:=	1
 
-PLAT_INCLUDES		:=	-Iinclude/common/tbbr			\
-				-Iplat/hisilicon/hikey960/include
+PLAT_INCLUDES		:=	-Iplat/hisilicon/hikey960/include
 
 PLAT_BL_COMMON_SOURCES	:=	drivers/arm/pl011/aarch64/pl011_console.S \
 				drivers/delay_timer/delay_timer.c	\

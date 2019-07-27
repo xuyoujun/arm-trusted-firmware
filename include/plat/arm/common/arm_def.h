@@ -1,12 +1,10 @@
 /*
- * Copyright (c) 2015-2018, ARM Limited and Contributors. All rights reserved.
+ * Copyright (c) 2015-2019, ARM Limited and Contributors. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
 #ifndef ARM_DEF_H
 #define ARM_DEF_H
-
-#include <platform_def.h>
 
 #include <arch.h>
 #include <common/interrupt_props.h>
@@ -150,7 +148,7 @@
 #define ARM_DRAM1_END			(ARM_DRAM1_BASE +		\
 					 ARM_DRAM1_SIZE - 1)
 
-#define ARM_DRAM2_BASE			UL(0x880000000)
+#define ARM_DRAM2_BASE			PLAT_ARM_DRAM2_BASE
 #define ARM_DRAM2_SIZE			PLAT_ARM_DRAM2_SIZE
 #define ARM_DRAM2_END			(ARM_DRAM2_BASE +		\
 					 ARM_DRAM2_SIZE - 1)
@@ -314,19 +312,6 @@
  *****************************************************************************/
 
 /*
- * We need to access DRAM2 from BL2 for PSCI_MEM_PROTECT for
- * AArch64 builds
- */
-#ifdef AARCH64
-#define PLAT_PHY_ADDR_SPACE_SIZE			(1ULL << 36)
-#define PLAT_VIRT_ADDR_SPACE_SIZE			(1ULL << 36)
-#else
-#define PLAT_PHY_ADDR_SPACE_SIZE			(1ULL << 32)
-#define PLAT_VIRT_ADDR_SPACE_SIZE			(1ULL << 32)
-#endif
-
-
-/*
  * This macro defines the deepest retention state possible. A higher state
  * id will represent an invalid or a power down state.
  */
@@ -350,7 +335,20 @@
  * and limit. Leave enough space of BL2 meminfo.
  */
 #define ARM_TB_FW_CONFIG_BASE		(ARM_BL_RAM_BASE + sizeof(meminfo_t))
-#define ARM_TB_FW_CONFIG_LIMIT		(ARM_BL_RAM_BASE + PAGE_SIZE)
+#define ARM_TB_FW_CONFIG_LIMIT		(ARM_BL_RAM_BASE + (PAGE_SIZE / 2U))
+
+/*
+ * Boot parameters passed from BL2 to BL31/BL32 are stored here
+ */
+#define ARM_BL2_MEM_DESC_BASE		ARM_TB_FW_CONFIG_LIMIT
+#define ARM_BL2_MEM_DESC_LIMIT		(ARM_BL2_MEM_DESC_BASE +	\
+							(PAGE_SIZE / 2U))
+
+/*
+ * Define limit of firmware configuration memory:
+ * ARM_TB_FW_CONFIG + ARM_BL2_MEM_DESC memory
+ */
+#define ARM_FW_CONFIG_LIMIT		(ARM_BL_RAM_BASE + PAGE_SIZE)
 
 /*******************************************************************************
  * BL1 specific defines.
@@ -445,7 +443,7 @@
  * SP_MIN is the only BL image in SRAM. Allocate the whole of SRAM (excluding
  * the page reserved for fw_configs) to BL32
  */
-#  define BL32_BASE			ARM_TB_FW_CONFIG_LIMIT
+#  define BL32_BASE			ARM_FW_CONFIG_LIMIT
 #  define BL32_LIMIT			(ARM_BL_RAM_BASE + ARM_BL_RAM_SIZE)
 # else
 /* Put BL32 below BL2 in the Trusted SRAM.*/
@@ -483,7 +481,7 @@
 #  define TSP_SEC_MEM_BASE		ARM_BL_RAM_BASE
 #  define TSP_SEC_MEM_SIZE		ARM_BL_RAM_SIZE
 #  define TSP_PROGBITS_LIMIT		BL31_BASE
-#  define BL32_BASE			ARM_TB_FW_CONFIG_LIMIT
+#  define BL32_BASE			ARM_FW_CONFIG_LIMIT
 #  define BL32_LIMIT			BL31_BASE
 # elif ARM_TSP_RAM_LOCATION_ID == ARM_TRUSTED_DRAM_ID
 #  define TSP_SEC_MEM_BASE		PLAT_ARM_TRUSTED_DRAM_BASE

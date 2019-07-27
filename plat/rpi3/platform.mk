@@ -27,6 +27,13 @@ BL2_SOURCES		+=	common/desc_image_load.c		\
 				drivers/io/io_fip.c			\
 				drivers/io/io_memmap.c			\
 				drivers/io/io_storage.c			\
+				drivers/gpio/gpio.c			\
+				drivers/delay_timer/delay_timer.c	\
+				drivers/delay_timer/generic_delay_timer.c \
+				drivers/rpi3/gpio/rpi3_gpio.c		\
+				drivers/io/io_block.c			\
+				drivers/mmc/mmc.c			\
+				drivers/rpi3/sdhost/rpi3_sdhost.c	\
 				plat/common/aarch64/platform_mp_stack.S	\
 				plat/rpi3/aarch64/plat_helpers.S	\
 				plat/rpi3/aarch64/rpi3_bl2_mem_params_desc.c \
@@ -95,9 +102,6 @@ SEPARATE_CODE_AND_RODATA	:= 1
 # Use Coherent memory
 USE_COHERENT_MEM		:= 1
 
-# Use multi console API
-MULTI_CONSOLE_API		:= 1
-
 # Platform build flags
 # --------------------
 
@@ -130,7 +134,9 @@ endif
 $(eval $(call add_define,RPI3_BL32_RAM_LOCATION_ID))
 $(eval $(call add_define,RPI3_BL33_IN_AARCH32))
 $(eval $(call add_define,RPI3_DIRECT_LINUX_BOOT))
+ifdef RPI3_PRELOADED_DTB_BASE
 $(eval $(call add_define,RPI3_PRELOADED_DTB_BASE))
+endif
 $(eval $(call add_define,RPI3_RUNTIME_UART))
 $(eval $(call add_define,RPI3_USE_UEFI_MAP))
 
@@ -141,10 +147,6 @@ ifneq (${RPI3_DIRECT_LINUX_BOOT}, 0)
   ifndef RPI3_PRELOADED_DTB_BASE
     $(error Error: RPI3_PRELOADED_DTB_BASE needed if RPI3_DIRECT_LINUX_BOOT=1)
   endif
-endif
-
-ifneq (${MULTI_CONSOLE_API}, 1)
-  $(error Error: rpi3 needs MULTI_CONSOLE_API=1)
 endif
 
 ifneq (${RESET_TO_BL31}, 0)

@@ -20,7 +20,6 @@ endif
 
 CONSOLE_BASE			:=	PL011_UART3_BASE
 CRASH_CONSOLE_BASE		:=	PL011_UART3_BASE
-MULTI_CONSOLE_API		:=	1
 PLAT_PARTITION_MAX_ENTRIES	:=	12
 PLAT_PL061_MAX_GPIOS		:=	160
 COLD_BOOT_SINGLE_CPU		:=	1
@@ -45,8 +44,7 @@ endif
 
 USE_COHERENT_MEM	:=	1
 
-PLAT_INCLUDES		:=	-Iinclude/common/tbbr			\
-				-Iplat/hisilicon/hikey/include
+PLAT_INCLUDES		:=	-Iplat/hisilicon/hikey/include
 
 PLAT_BL_COMMON_SOURCES	:=	drivers/arm/pl011/aarch64/pl011_console.S \
 				lib/xlat_tables/aarch64/xlat_tables.c	\

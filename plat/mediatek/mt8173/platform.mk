@@ -9,7 +9,6 @@ MTK_PLAT_SOC		:=	${MTK_PLAT}/${PLAT}
 
 PLAT_INCLUDES		:=	-I${MTK_PLAT}/common/				\
 				-I${MTK_PLAT}/common/drivers/uart/		\
-				-Iinclude/plat/arm/common			\
 				-Iinclude/plat/arm/common/aarch64		\
 				-I${MTK_PLAT_SOC}/drivers/crypt/		\
 				-I${MTK_PLAT_SOC}/drivers/mtcmos/		\
@@ -24,7 +23,8 @@ PLAT_BL_COMMON_SOURCES	:=	lib/xlat_tables/xlat_tables_common.c		\
 				plat/arm/common/arm_gicv2.c			\
 				plat/common/plat_gicv2.c
 
-BL31_SOURCES		+=	drivers/arm/cci/cci.c				\
+BL31_SOURCES		+=	common/desc_image_load.c			\
+				drivers/arm/cci/cci.c				\
 				drivers/arm/gic/common/gic_common.c		\
 				drivers/arm/gic/v2/gicv2_main.c			\
 				drivers/arm/gic/v2/gicv2_helpers.c		\

@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2015-2018, Renesas Electronics Corporation. All rights reserved.
+ * Copyright (c) 2015-2019, Renesas Electronics Corporation. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#define BOARDNUM 18
+#define BOARDNUM 22
 #define BOARD_JUDGE_AUTO
 
 #ifdef BOARD_JUDGE_AUTO
@@ -1322,7 +1322,211 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
 	    0, 0, 0, 0, 0, 0, 0, 0}
 	  }
 	 }
-	}
+	},
+/* boardcnf[18] RENESAS SALVATOR-X board with M3-W/SIP(16Gbit 2rank) */
+	{
+	 0x03,
+	 0x01,
+	 0x02c0,
+	 0,
+	 0x0300,
+	 0x00a0,
+	 {
+	  {
+	   {0x04, 0x04},
+	    0x00543210,
+	    0x3201,
+	   {0x70612543, 0x43251670, 0x45326170, 0x10672534},
+	   {0x08, 0x08, 0x08, 0x08},
+	   WDQLVL_PAT,
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0},
+	   {0, 0, 0, 0},
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0},
+	   {0, 0, 0, 0},
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0}
+	   },
+	  {
+	   {0x04, 0x04},
+	    0x00543210,
+	    0x2310,
+	   {0x01327654, 0x34526107, 0x35421670, 0x70615324},
+	   {0x08, 0x08, 0x08, 0x08},
+	   WDQLVL_PAT,
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0},
+	   {0, 0, 0, 0},
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0},
+	   {0, 0, 0, 0},
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0}
+	  }
+	 }
+	},
+/* boardcnf[19] RENESAS SALVATOR-X board with M3-W/SIP(16Gbit 1rank) */
+        {
+         0x03,
+         0x01,
+         0x02c0,
+         0,
+         0x0300,
+         0x00a0,
+	 {
+          {
+	   {0x04, 0xff},
+	    0x00543210,
+	    0x3201,
+	   {0x70612543, 0x43251670, 0x45326170, 0x10672534},
+	   {0x08, 0x08, 0x08, 0x08},
+	   WDQLVL_PAT,
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0},
+	   {0, 0, 0, 0},
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0},
+	   {0, 0, 0, 0},
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0}
+	   },
+	  {
+	   {0x04, 0xff},
+	    0x00543210,
+	    0x2310,
+	   {0x01327654, 0x34526107, 0x35421670, 0x70615324},
+	   {0x08, 0x08, 0x08, 0x08},
+	   WDQLVL_PAT,
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0},
+	   {0, 0, 0, 0},
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0},
+	   {0, 0, 0, 0},
+	   {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0}
+	  }
+	 }
+	},
+/* boardcnf[20] RENESAS KRIEK 16Gbit/2rank/2ch board with M3-W/SoC */
+        {
+         0x03,
+         0x01,
+         0x02c0,
+         0,
+         0x0300,
+         0x00a0,
+         {
+          {
+           {0x04, 0x04},
+            0x00345201,
+            0x3201,
+           {0x01672543, 0x45361207, 0x45632107, 0x60715234},
+           {0x08, 0x08, 0x08, 0x08},
+            WDQLVL_PAT,
+           {0, 0, 0, 0, 0, 0, 0, 0,
+	    0, 0},
+           {0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0},
+           {0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0}
+           },
+          {
+	   {0x04, 0x04},
+            0x00302154,
+            0x2310,
+           {0x01672543, 0x45361207, 0x45632107, 0x60715234},
+           {0x08, 0x08, 0x08, 0x08},
+           WDQLVL_PAT,
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0},
+           {0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0},
+           {0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0}
+          }
+         }
+        },
+/* boardcnf[21] RENESAS KRIEK 16Gbit/1rank/2ch board with M3-W/SoC */
+        {
+         0x03,
+         0x01,
+         0x02c0,
+         0,
+         0x0300,
+         0x00a0,
+         {
+          {
+           {0x04, 0xff},
+            0x00345201,
+            0x3201,
+           {0x01672543, 0x45361207, 0x45632107, 0x60715234},
+           {0x08, 0x08, 0x08, 0x08},
+           WDQLVL_PAT,
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0},
+           {0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0},
+           {0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0}
+           },
+          {
+           {0x04, 0xff},
+            0x00302154,
+            0x2310,
+           {0x01672543, 0x45361207, 0x45632107, 0x60715234},
+           {0x08, 0x08, 0x08, 0x08},
+           WDQLVL_PAT,
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0},
+           {0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0},
+           {0, 0, 0, 0},
+           {0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0}
+           }
+          }
+         }
 };
 
 void boardcnf_get_brd_clk(uint32_t brd, uint32_t * clk, uint32_t * div)
@@ -1419,12 +1623,7 @@ static const uint32_t TermcodeBySample[20][3] = {
 #define PFC_PUD6	0xE6060458U
 #define GPIO_INDT5	0xE605500CU
 #define GPIO_INDT6	0xE605540CU
-
-#define BIT25 		(1<<25)
-#define BIT22 		(1<<22)
-#define BIT15 		(1<<15)
-#define BIT0  		(1)
-#define GPIO_GPSR6 	(0xE6060118U)
+#define GPIO_GPSR6 	0xE6060118U
 
 #if (RCAR_GEN3_ULCB == 0)
 static void pfc_write_and_poll(uint32_t a, uint32_t v)
@@ -1455,17 +1654,17 @@ static uint32_t opencheck_SSI_WS6(void)
 	pud5_bak = mmio_read_32(PFC_PUD5);
 	dsb_sev();
 
-	dataL = (gpsr6_bak & ~BIT15);
+	dataL = (gpsr6_bak & ~BIT(15));
 	pfc_write_and_poll(GPIO_GPSR6, dataL);
 
 	/* Pull-Up/Down Enable (PUEN5[22]=1) */
 	dataL = puen5_bak;
-	dataL |= (BIT22);
+	dataL |= (BIT(22));
 	pfc_write_and_poll(PFC_PUEN5, dataL);
 
 	/* Pull-Down-Enable (PUD5[22]=0, PUEN5[22]=1) */
 	dataL = pud5_bak;
-	dataL &= ~(BIT22);
+	dataL &= ~(BIT(22));
 	pfc_write_and_poll(PFC_PUD5, dataL);
 	/* GPSR6[15]=SSI_WS6 */
 	rcar_micro_delay(10);
@@ -1474,7 +1673,7 @@ static uint32_t opencheck_SSI_WS6(void)
 
 	/* Pull-Up-Enable (PUD5[22]=1, PUEN5[22]=1) */
 	dataL = pud5_bak;
-	dataL |= (BIT22);
+	dataL |= (BIT(22));
 	pfc_write_and_poll(PFC_PUD5, dataL);
 
 	/* GPSR6[15]=SSI_WS6 */
@@ -1567,9 +1766,15 @@ static uint32_t _board_judge(void)
 		} else if (Prr_Product == PRR_PRODUCT_M3N) {
 			/* RENESAS SALVATOR-X (M3-N/SIP) */
 			brd = 11;
-		} else if (Prr_Product == PRR_PRODUCT_M3) {
+		} else if ((Prr_Product == PRR_PRODUCT_M3) && (Prr_Cut <= PRR_PRODUCT_20)) {
 			/* RENESAS SALVATOR-X (M3-W/SIP) */
 			brd = 0;
+		} else if ((Prr_Product == PRR_PRODUCT_M3) && (Prr_Cut < PRR_PRODUCT_30)) {
+			/* RENESAS SALVATOR-X (M3-W Ver.1.x/SIP) */
+			brd = 19;
+		} else if ((Prr_Product == PRR_PRODUCT_M3) && (Prr_Cut >= PRR_PRODUCT_30)) {
+			/* RENESAS SALVATOR-X (M3-W ver.3.0/SIP) */
+			brd = 18;
 		}
 	}
 #endif

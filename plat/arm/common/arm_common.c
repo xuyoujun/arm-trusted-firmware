@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2018, ARM Limited and Contributors. All rights reserved.
+ * Copyright (c) 2015-2019, ARM Limited and Contributors. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -14,10 +14,9 @@
 #include <common/romlib.h>
 #include <lib/mmio.h>
 #include <lib/xlat_tables/xlat_tables_compat.h>
+#include <plat/arm/common/plat_arm.h>
 #include <plat/common/platform.h>
 #include <services/secure_partition.h>
-
-#include <plat_arm.h>
 
 /* Weak definitions may be overridden in specific ARM standard platform */
 #pragma weak plat_get_ns_image_entrypoint
@@ -41,7 +40,7 @@ uintptr_t plat_get_ns_image_entrypoint(void)
 #ifdef PRELOADED_BL33_BASE
 	return PRELOADED_BL33_BASE;
 #else
-	return PLAT_ARM_NS_IMAGE_OFFSET;
+	return PLAT_ARM_NS_IMAGE_BASE;
 #endif
 }
 
@@ -128,12 +127,12 @@ void arm_configure_sys_timer(void)
 	 */
 	mmio_write_32(ARM_SYS_TIMCTL_BASE + CNTCTLBASE_CNTFRQ, freq_val);
 
-#ifdef PLAT_juno
+#if defined(PLAT_juno) || defined(PLAT_n1sdp)
 	/*
 	 * Initialize CNTFRQ register in Non-secure CNTBase frame.
-	 * This is only required for Juno, because it doesn't follow ARM ARM
-	 * in that the value updated in CNTFRQ is not reflected in
-	 * CNTBASEN_CNTFRQ. Hence update the value manually.
+	 * This is only required for Juno and N1SDP, because they do not
+	 * follow ARM ARM in that the value updated in CNTFRQ is not
+	 * reflected in CNTBASEN_CNTFRQ. Hence update the value manually.
 	 */
 	mmio_write_32(ARM_SYS_CNT_BASE_NS + CNTBASEN_CNTFRQ, freq_val);
 #endif
